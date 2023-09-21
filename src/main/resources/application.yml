@@ -1,0 +1,6 @@
+server:
+  port: 1024
+  servlet:
+    context-path: /tsc/api
+springdoc:
+  show-actuator: true
