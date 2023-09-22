@@ -1,7 +1,5 @@
 package com.citi.techfest.ikigai.tsc.service;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
 import com.citi.techfest.ikigai.tsc.entity.Navigator;
 import com.citi.techfest.ikigai.tsc.entity.Participant;
 import com.citi.techfest.ikigai.tsc.entity.ServiceItem;
@@ -22,9 +20,6 @@ public class ParticipantService {
     private ParticipantRepository participantRepository;
     @Autowired
     private NavigatorRepository navigatorRepository;
-
-    @Autowired
-    private DynamoDBMapper dynamoDBMapper;
 
     public List<Navigator> getAllNavigators() {
         return navigatorRepository.findAll();
