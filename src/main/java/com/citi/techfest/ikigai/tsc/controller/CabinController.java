@@ -19,10 +19,11 @@ public class CabinController {
         this.cabinRepository = cabinRepository;
     }
 
-    @PostMapping("/searchCabin")
-    public ResponseEntity<String> searchCabin(@RequestBody Cabin cabinSearchCondition) {
-        // TODO: Implement cabin search logic based on the cabinSearchCondition
-//        List<Cabin> cabins = cabinRepository.findAll();
-//        return ResponseEntity.ok(cabinData);
+    @PostMapping("/getCabins")
+    public ResponseEntity<List<Cabin>> getCabins() {
+        List<Cabin> cabins = cabinRepository.findAll();
+        return ResponseEntity.ok(cabins);
     }
+
+
 }

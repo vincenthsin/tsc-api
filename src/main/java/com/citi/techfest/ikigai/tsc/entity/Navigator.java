@@ -1,10 +1,7 @@
 package com.citi.techfest.ikigai.tsc.entity;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import lombok.Data;
 
-import java.time.LocalDate;
-import java.util.List;
 import javax.persistence.*;
 
 @Entity

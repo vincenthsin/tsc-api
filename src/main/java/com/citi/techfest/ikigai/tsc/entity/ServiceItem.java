@@ -1,10 +1,8 @@
 package com.citi.techfest.ikigai.tsc.entity;
 import javax.persistence.*;
 import javax.persistence.Entity;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
-
 import java.time.LocalDate;
 
 @Entity

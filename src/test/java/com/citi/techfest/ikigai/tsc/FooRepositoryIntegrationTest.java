@@ -2,10 +2,6 @@ package com.citi.techfest.ikigai.tsc;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.model.CreateTableRequest;
-import com.amazonaws.services.dynamodbv2.model.ProvisionedThroughput;
-import com.citi.techfest.ikigai.tsc.entity.Foo;
-import com.citi.techfest.ikigai.tsc.repository.FooRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
