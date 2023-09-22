@@ -18,7 +18,7 @@ public class ServicesController {
 
     public ServicesController(ServiceItemRepository serviceItemRepository, ParticipantRepository beneficiaryRepository) {
         this.serviceItemRepository = serviceItemRepository;
-        this.participantRepository = participantRepository;
+        this.participantRepository = beneficiaryRepository;
     }
 
     @PostMapping("/addService")
