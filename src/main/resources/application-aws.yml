@@ -1,6 +1,8 @@
-amazon:
-  dynamodb:
-    endpoint: http://dynamodb.us-east-2.amazonaws.com
-  aws:
-    accesskey: AKIA5K6HSESLW5JFPX6S
-    secretkey: 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
+spring:
+  datasource:
+    url: jdbc:mysql://222.65.124.213:3306/ikigaidb
+    username: root
+    password: my-secret-pw
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
