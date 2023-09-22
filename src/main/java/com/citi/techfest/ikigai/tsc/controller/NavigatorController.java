@@ -53,10 +53,10 @@ public class NavigatorController {
 //    }
 
 
-    @PostMapping("/api/navigator/searchBeneficiary")
-    public ResponseEntity<List<Participant>> searchBeneficiary(@RequestBody Participant participant) {
-        Participant createdParticipant = participantService.createParticipant(participant);
-        return new ResponseEntity<>(createdParticipant, HttpStatus.CREATED);
-    }
+//    @PostMapping("/api/navigator/searchBeneficiary")
+//    public ResponseEntity<List<Participant>> searchBeneficiary(@RequestBody Participant participant) {
+//        Participant createdParticipant = participantService.createParticipant(participant);
+//        return new ResponseEntity<>(createdParticipant, HttpStatus.CREATED);
+//    }
 
 }
