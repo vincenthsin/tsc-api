@@ -47,10 +47,10 @@ public class NavigatorController {
         navigatorService.assignParticipantToNavigator(navigatorId, participant);
     }
 
-    @PostMapping("/createServicePlan/{participantId}")
-    public void bookServiceForBeneficiary(@RequestBody List<ServicePlan> serviceplanList, @PathVariable String participantId) {
-        navigatorService.bookServiceForBeneficiary(serviceplanList, participantId);
-    }
+//    @PostMapping("/createServicePlan/{participantId}")
+//    public void bookServiceForBeneficiary(@RequestBody List<ServicePlan> serviceplanList, @PathVariable String participantId) {
+//        navigatorService.bookServiceForBeneficiary(serviceplanList, participantId);
+//    }
 
 
     @PostMapping("/api/navigator/searchBeneficiary")

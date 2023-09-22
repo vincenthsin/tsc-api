@@ -22,7 +22,7 @@ public class CabinController {
     @PostMapping("/searchCabin")
     public ResponseEntity<String> searchCabin(@RequestBody Cabin cabinSearchCondition) {
         // TODO: Implement cabin search logic based on the cabinSearchCondition
-        List<Cabin> cabins = cabinRepository.findAll();
-        return ResponseEntity.ok(cabinData);
+//        List<Cabin> cabins = cabinRepository.findAll();
+//        return ResponseEntity.ok(cabinData);
     }
 }

@@ -85,7 +85,7 @@ public class ParticipantService {
         List<Participant> assignedParticipants = getAssignedParticipants(navigatorId);
         List<ServiceItem> services = new ArrayList<>();
         for (Participant participant : assignedParticipants) {
-            services.addAll(participant.getServicePlanList());
+            services.addAll(participant.getServiceItemList());
         }
         return services;
     }
