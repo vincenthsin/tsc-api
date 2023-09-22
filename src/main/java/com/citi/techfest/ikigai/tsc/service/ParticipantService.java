@@ -110,12 +110,13 @@ public class ParticipantService {
         String gender = beneficiarySearchCondition.getGender();
         String navigator = beneficiarySearchCondition.getNavigator();
         String name = beneficiarySearchCondition.getName();
+        String services = beneficiarySearchCondition.getServices();
         int pageIndex = beneficiarySearchCondition.getPage(); //当前页码（注意：第一页是从0开始）
         int pageSize = beneficiarySearchCondition.getPaginationSize();
         String sortField = StringUtils.hasText(beneficiarySearchCondition.getOrderFiled()) ? beneficiarySearchCondition.getOrderFiled() : "name";
         String sortOrder = StringUtils.hasText(beneficiarySearchCondition.getOrderType()) ? beneficiarySearchCondition.getOrderType() : "ASC";
         PageHelper.startPage(pageIndex, pageSize);
-        List<Participant> searchResult = participantMapper.searchBeneficiary(caseClosure, developGoal, gender, navigator, name, sortField, sortOrder);
+        List<Participant> searchResult = participantMapper.searchBeneficiary(caseClosure, developGoal, gender, navigator, name, sortField, sortOrder, services);
         PageInfo<Participant> pageResult = new PageInfo<>(searchResult);
         return pageResult;
     }

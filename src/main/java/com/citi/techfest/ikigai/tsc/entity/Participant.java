@@ -65,4 +65,10 @@ public class Participant implements Serializable {
     @OneToMany(mappedBy = "participant")
     @JsonBackReference
     private List<ServiceItem> serviceItemList;
+
+    @Column(name = "organization")
+    private String organization;
+
+    @Column(name = "onboard_date")
+    private LocalDate onboardDate;
 }
