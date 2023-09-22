@@ -4,6 +4,7 @@ import com.citi.techfest.ikigai.tsc.entity.Participant;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -17,4 +18,13 @@ public interface ParticipantMapper {
             @Param("name") String name,
             @Param("sortField") String sortField,
             @Param("sortOrder") String sortOrder);
+
+    List<Participant> searchStaff(
+            @Param("sortField") String sortField,
+            @Param("sortOrder") String sortOrder,
+            @Param("organization") String organization,
+            @Param("onboardDateFrom") LocalDate onboardDateFrom,
+            @Param("onboardDateTo") LocalDate onboardDateTo,
+            @Param("name") String name,
+            @Param("gender") String gender);
 }

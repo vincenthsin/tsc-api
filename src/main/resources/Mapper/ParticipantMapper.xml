@@ -26,6 +26,27 @@
         order by #{sortField} #{sortOrder}
     </select>
 
+    <select id="searchStaff" resultType="com.citi.techfest.ikigai.tsc.entity.Participant">
+        select * from tsc.participant
+        <where>
+            <if test="name!=null">
+                name like concat('%', #{name}, '%')
+            </if>
+            <if test="gender!=null">
+                and gender=#{gender}
+            </if>
+            <if test="organization!=null">
+                and organization like concat('%', #{organization}, '%')
+            </if>
+            <if test="onboardDateFrom!=null">
+                and onboard_date &gt; #{onboardDateFrom}
+            </if>
+            <if test="onboardDateTo!=null">
+                and onboard_date &lt; #{onboardDateTo}
+            </if>
+        </where>
+        order by #{sortField} #{sortOrder}
+    </select>
 </mapper>
 
 

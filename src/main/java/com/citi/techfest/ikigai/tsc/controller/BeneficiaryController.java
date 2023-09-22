@@ -2,6 +2,7 @@ package com.citi.techfest.ikigai.tsc.controller;
 
 
 import com.citi.techfest.ikigai.tsc.dto.BeneficiarySearchCondition;
+import com.citi.techfest.ikigai.tsc.dto.StaffSearchCondition;
 import com.citi.techfest.ikigai.tsc.entity.Participant;
 import com.citi.techfest.ikigai.tsc.service.ParticipantService;
 import com.github.pagehelper.PageInfo;
@@ -40,6 +41,11 @@ public class BeneficiaryController {
     @PostMapping("/searchBeneficiary")
     public ResponseEntity<PageInfo<Participant>> searchBeneficiary(@RequestBody BeneficiarySearchCondition beneficiarySearchCondition) {
         return ResponseEntity.ok(participantService.searchBeneficiary(beneficiarySearchCondition));
+    }
+
+    @PostMapping("/searchStaff")
+    public ResponseEntity<PageInfo<Participant>> searchStaff(@RequestBody StaffSearchCondition staffSearchCondition) {
+        return ResponseEntity.ok(participantService.searchStaff(staffSearchCondition));
     }
 
 }
