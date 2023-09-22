@@ -1,5 +1,6 @@
 package com.citi.techfest.ikigai.tsc.controller;
 
+import com.citi.techfest.ikigai.tsc.dto.CabinSearchCondition;
 import com.citi.techfest.ikigai.tsc.entity.Cabin;
 import com.citi.techfest.ikigai.tsc.repository.CabinRepository;
 import org.springframework.http.ResponseEntity;
@@ -25,5 +26,13 @@ public class CabinController {
         return ResponseEntity.ok(cabins);
     }
 
+    @PostMapping("/searchCabin")
+    public ResponseEntity<List<Cabin>> searchCabin(@RequestBody Cabin cabinSearchCondition) {
+
+        String location = cabinSearchCondition.getLocation();
+        String facility = cabinSearchCondition.getFacility();
+        List<Cabin> cabins = cabinRepository.findByLocationAndFacility(location, facility);
+        return ResponseEntity.ok(cabins);
+    }
 
 }
