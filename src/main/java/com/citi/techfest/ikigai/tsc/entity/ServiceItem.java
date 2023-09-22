@@ -1,10 +1,8 @@
 package com.citi.techfest.ikigai.tsc.entity;
 import javax.persistence.*;
 import javax.persistence.Entity;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -19,7 +17,8 @@ public class ServiceItem {
         private String serviceName;
 
         @ManyToOne
-        @JoinColumn(name = "participant", referencedColumnName = "name")
+        @JoinColumn(name = "participant")
+        @JsonManagedReference
         private Participant participant;
 
         @Column(name = "service_provider")
@@ -28,17 +27,11 @@ public class ServiceItem {
         @Column(name = "organization_address")
         private String organizationAddress;
 
-        @Column(name = "organization_name")
-        private String organizationName;
-
         @Column(name = "service_category")
         private String serviceCategory;
 
         @Column(name = "service_start_date")
         private LocalDate serviceStartDate;
-
-        @Column(name = "service_date")
-        private LocalDate serviceDate;
 
         @Column(name = "last_modified_date")
         private LocalDate lastModifiedDate;
@@ -52,6 +45,6 @@ public class ServiceItem {
         @Column(name = "service_feedback")
         private String serviceFeedback;
 
-        @Column(name = "assigned_case_worker")
+        @Column(name = "case_worker")
         private String caseWorker;
 }
