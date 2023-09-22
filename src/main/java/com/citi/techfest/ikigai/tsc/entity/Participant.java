@@ -1,13 +1,11 @@
 package com.citi.techfest.ikigai.tsc.entity;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.*;
-        import java.util.List;
 
 @Entity
 @Table(name = "participant")
@@ -41,20 +39,23 @@ public class Participant {
     @Column(name = "move_in_date")
     private LocalDate moveInDate;
 
-    @Column(name = "leave_date")
-    private LocalDate leaveDate;
+    @Column(name = "case_closure")
+    private Boolean caseClosure;
 
-    @Column(name = "leave_reason")
-    private String leaveReason;
+    @Column(name = "case_closure_leave_date")
+    private LocalDate caseClosureLeaveDate;
 
-    @Column(name = "comments")
-    private String comments;
+    @Column(name = "case_closure_leave_reason")
+    private String caseClosureLeaveReason;
+
+    @Column(name = "case_closure_comments")
+    private String caseClosureComments;
 
     @Column(name = "assigned_navigator")
     private String assignedNavigator;
 
-    @ElementCollection
-    private List<String> developGoal;
+    @Column(name = "developGoal")
+    private String developGoal;
 
     @Column(name = "condition_summary")
     private String conditionSummary;
