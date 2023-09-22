@@ -1,12 +1,15 @@
 package com.citi.techfest.ikigai.tsc.controller;
 
 
+import com.citi.techfest.ikigai.tsc.dto.BeneficiarySearchCondition;
 import com.citi.techfest.ikigai.tsc.entity.Participant;
 import com.citi.techfest.ikigai.tsc.service.ParticipantService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 
 @RestController
@@ -32,6 +35,11 @@ public class BeneficiaryController {
     public ResponseEntity<Void> deletePBeneficiary(@PathVariable String id) {
         participantService.deleteParticipant(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/searchBeneficiary")
+    public ResponseEntity<PageInfo<Participant>> searchBeneficiary(@RequestBody BeneficiarySearchCondition beneficiarySearchCondition) {
+        return ResponseEntity.ok(participantService.searchBeneficiary(beneficiarySearchCondition));
     }
 
 }

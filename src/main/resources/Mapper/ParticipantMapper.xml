@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.citi.techfest.ikigai.tsc.mapper.ParticipantMapper">
+
+    <select id="searchBeneficiary" resultType="com.citi.techfest.ikigai.tsc.entity.Participant">
+        select * from tsc.participant
+        <where>
+            <if test="caseClosure!=null">
+                case_closure=#{caseClosure}
+            </if>
+            <if test="developGoal!=null">
+                and develop_goal like concat('%', #{developGoal}, '%')
+            </if>
+            <if test="gender!=null">
+                and gender=#{gender}
+            </if>
+            <if test="navigator!=null">
+                and assigned_navigator like concat('%', #{navigator}, '%')
+            </if>
+            <if test="name!=null">
+                and name like concat('%', #{name}, '%')
+            </if>
+        </where>
+        order by #{sortField} #{sortOrder}
+    </select>
+
+</mapper>
+
+
+
