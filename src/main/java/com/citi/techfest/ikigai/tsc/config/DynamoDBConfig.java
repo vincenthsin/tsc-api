@@ -21,7 +21,6 @@ import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 @EnableDynamoDBRepositories
   (basePackages = "com.citi.techfest.ikigai.tsc")
 public class DynamoDBConfig {
-
     @Value("${amazon.dynamodb.endpoint}")
     private String amazonDynamoDBEndpoint;
 

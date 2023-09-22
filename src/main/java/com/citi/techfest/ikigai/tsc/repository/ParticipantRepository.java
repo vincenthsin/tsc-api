@@ -3,15 +3,13 @@ package com.citi.techfest.ikigai.tsc.repository;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.citi.techfest.ikigai.tsc.entity.Foo;
 import com.citi.techfest.ikigai.tsc.entity.Participant;
-import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-@EnableScan
-public interface ParticipantRepository extends CrudRepository<Participant, String> {
+
+public interface ParticipantRepository extends JpaRepository<Participant, Long> {
     List<Participant> findByName(String name);
 
     List<Participant> findByAssignedNavigator(String assignedNavigatorID);
