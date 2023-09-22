@@ -13,8 +13,8 @@ public class Cabin {
     @Column(name = "number")
     private Integer number;
 
-    @Column(name = "available")
-    private Boolean available;
+    @Column(name = "availability")
+    private Boolean availability;
 
     @Column(name = "location")
     private String location;
@@ -22,6 +22,6 @@ public class Cabin {
     @Column(name = "facility")
     private String facility;
 
-    @ElementCollection
-    private List<String> tenant;
+    @Column(name = "tenant")
+    private String tenant;
 }

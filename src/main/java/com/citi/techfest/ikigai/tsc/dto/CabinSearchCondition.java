@@ -11,7 +11,7 @@ import javax.persistence.Column;
 @NoArgsConstructor
 public class CabinSearchCondition {
     private Integer number;
-    private Boolean available;
+    private Boolean availability;
     private String location;
     private String facility;
 }
