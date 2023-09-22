@@ -1,6 +1,7 @@
 package com.citi.techfest.ikigai.tsc.service;
 
 import com.citi.techfest.ikigai.tsc.dto.BeneficiarySearchCondition;
+import com.citi.techfest.ikigai.tsc.dto.StaffSearchCondition;
 import com.citi.techfest.ikigai.tsc.entity.Navigator;
 import com.citi.techfest.ikigai.tsc.entity.Participant;
 import com.citi.techfest.ikigai.tsc.entity.ServiceItem;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.citi.techfest.ikigai.tsc.util.Constants;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -116,5 +118,21 @@ public class ParticipantService {
         List<Participant> searchResult = participantMapper.searchBeneficiary(caseClosure, developGoal, gender, navigator, name, sortField, sortOrder);
         PageInfo<Participant> pageResult = new PageInfo<>(searchResult);
         return pageResult;
+    }
+
+    public PageInfo<Participant> searchStaff(StaffSearchCondition staffSearchCondition) {
+
+        Integer page = staffSearchCondition.getPage();
+        Integer paginationSize = staffSearchCondition.getPaginationSize();
+        String sortField = StringUtils.hasText(staffSearchCondition.getOrderFiled()) ? staffSearchCondition.getOrderFiled() : "name";
+        String sortOrder = StringUtils.hasText(staffSearchCondition.getOrderType()) ? staffSearchCondition.getOrderType() : "ASC";
+        String organization = staffSearchCondition.getOrganization();
+        LocalDate onboardDateFrom = staffSearchCondition.getOnboardDateFrom();
+        LocalDate onboardDateTo = staffSearchCondition.getOnboardDateTo();
+        String name = staffSearchCondition.getName();
+        String gender = staffSearchCondition.getGender();
+        PageHelper.startPage(page, paginationSize);
+        List<Participant> searchResult = participantMapper.searchStaff(sortField, sortOrder, organization, onboardDateFrom, onboardDateTo, name, gender);
+        return new PageInfo<>(searchResult);
     }
 }
