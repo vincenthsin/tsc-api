@@ -4,23 +4,60 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.citi.techfest.ikigai.tsc.mapper.ParticipantMapper">
 
-    <select id="searchBeneficiary" resultType="com.citi.techfest.ikigai.tsc.entity.Participant">
-        select * from tsc.participant
+    <resultMap id="participantMap" type="com.citi.techfest.ikigai.tsc.entity.Participant" autoMapping="true">
+        <result column="date_of_birth" property="dateOfBirth"/>
+        <result column="contact_number" property="contactNumber"/>
+        <result column="move_in_date" property="moveInDate"/>
+        <result column="cabin_number" property="cabinNumber"/>
+        <result column="develop_goal" property="developGoal"/>
+        <result column="condition_summary" property="conditionSummary"/>
+        <result column="assigned_navigator" property="assignedNavigator"/>
+        <result column="case_closure" property="caseClosure"/>
+        <result column="case_closure_leave_date" property="caseClosureLeaveDate"/>
+        <result column="case_closure_leave_reason" property="caseClosureLeaveReason"/>
+        <result column="case_closure_comments" property="caseClosureComments"/>
+        <result column="onboard_date" property="onboardDate"/>
+        <collection property="serviceItemList" javaType="List" ofType="com.citi.techfest.ikigai.tsc.entity.ServiceItem"
+                    autoMapping="true">
+            <result column="service_name" property="serviceName"/>
+            <result column="service_provider" property="serviceProvider"/>
+            <result column="organization_address" property="organizationAddress"/>
+            <result column="service_category" property="serviceCategory"/>
+            <result column="service_start_date" property="serviceStartDate"/>
+            <result column="service_status" property="serviceStatus"/>
+            <result column="last_modified_date" property="lastModifiedDate"/>
+            <result column="service_comments" property="serviceComments"/>
+            <result column="service_feedback" property="caseWorker"/>
+        </collection>
+    </resultMap>
+    <select id="searchBeneficiary" resultType="com.citi.techfest.ikigai.tsc.entity.Participant"
+            resultMap="participantMap">
+        select p.role,p.name,p.gender,p.contact_number,p.email,p.date_of_birth,p.cabin_number,p.move_in_date,
+        p.case_closure,p.case_closure_leave_date,p.case_closure_leave_reason,p.case_closure_comments,p.assigned_navigator,p.develop_goal,p.condition_summary,
+        p.organization,p.onboard_date,
+        s.service_name,s.participant,s.service_provider,s.organization_address,s.service_category,s.service_start_date,s.last_modified_date,
+        s.service_status,s.service_comments,s.service_feedback,s.case_worker
+        from tsc.participant p left join
+        tsc.service_item s
+        on p.name=s.participant
         <where>
             <if test="caseClosure!=null">
-                case_closure=#{caseClosure}
+                p.case_closure=#{caseClosure}
             </if>
             <if test="developGoal!=null">
-                and develop_goal like concat('%', #{developGoal}, '%')
+                and p.develop_goal like concat('%', #{developGoal}, '%')
             </if>
             <if test="gender!=null">
-                and gender=#{gender}
+                and p.gender=#{gender}
             </if>
             <if test="navigator!=null">
-                and assigned_navigator like concat('%', #{navigator}, '%')
+                and p.assigned_navigator like concat('%', #{navigator}, '%')
+            </if>
+            <if test="services!=null">
+                and s.service_name like concat('%', #{services}, '%')
             </if>
             <if test="name!=null">
-                and name like concat('%', #{name}, '%')
+                and p.name like concat('%', #{name}, '%')
             </if>
         </where>
         order by #{sortField} #{sortOrder}

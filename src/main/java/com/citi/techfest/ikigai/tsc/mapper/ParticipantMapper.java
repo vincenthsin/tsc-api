@@ -17,7 +17,8 @@ public interface ParticipantMapper {
             @Param("navigator") String navigator,
             @Param("name") String name,
             @Param("sortField") String sortField,
-            @Param("sortOrder") String sortOrder);
+            @Param("sortOrder") String sortOrder,
+            @Param("services") String services);
 
     List<Participant> searchStaff(
             @Param("sortField") String sortField,
