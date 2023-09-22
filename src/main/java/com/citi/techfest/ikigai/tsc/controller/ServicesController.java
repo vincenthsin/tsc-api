@@ -16,7 +16,7 @@ public class ServicesController {
     private final ServiceItemRepository serviceItemRepository;
     private final ParticipantRepository participantRepository;
 
-    public ServicesController(ServiceItemRepository serviceItemRepository, ParticipantRepository beneficiaryRepository) {
+    public ServicesController(ServiceItemRepository serviceItemRepository, ParticipantRepository participantRepository) {
         this.serviceItemRepository = serviceItemRepository;
         this.participantRepository = participantRepository;
     }
