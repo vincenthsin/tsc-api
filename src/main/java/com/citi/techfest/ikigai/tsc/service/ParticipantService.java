@@ -5,7 +5,6 @@ import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
 import com.citi.techfest.ikigai.tsc.entity.Navigator;
 import com.citi.techfest.ikigai.tsc.entity.Participant;
 import com.citi.techfest.ikigai.tsc.entity.ServiceItem;
-import com.citi.techfest.ikigai.tsc.entity.ServicePlan;
 import com.citi.techfest.ikigai.tsc.repository.NavigatorRepository;
 import com.citi.techfest.ikigai.tsc.repository.ParticipantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,7 @@ public class ParticipantService {
         return participantRepository.findByRole(Constants.BENEFICIARY);
     }
     public Optional<Participant> getParticipantById(String id) {
-        return participantRepository.findById(id);
+        return participantRepository.findById(Long.parseLong(id));
     }
 
     public List<Participant> getBeneficiariesByNavigatorID(String navigatorID) {
@@ -59,16 +58,16 @@ public class ParticipantService {
     }
 
     public Participant updateParticipant(String id, Participant participant) {
-        Optional<Participant> optionalParticipant = participantRepository.findById(id);
+        Optional<Participant> optionalParticipant = participantRepository.findById(Long.parseLong(id));
         if (optionalParticipant.isPresent()) {
-            participant.setId(id);
+            participant.setId(Long.parseLong(id));
             return participantRepository.save(participant);
         }
         return null;
     }
 
     public void deleteParticipant(String id) {
-        participantRepository.deleteById(id);
+        participantRepository.deleteById(Long.parseLong(id));
     }
 
     //---------------
@@ -93,14 +92,7 @@ public class ParticipantService {
     public void assignParticipantToNavigator(String navigatorId, Participant participant) {
         participant.setAssignedNavigator(navigatorId);
         participantRepository.save(participant);
-        Navigator navigator = navigatorRepository.findById(navigatorId).get();
+        Navigator navigator = navigatorRepository.findById(Long.parseLong(navigatorId)).get();
         navigatorRepository.save(navigator);
-    }
-
-    public void bookServiceForBeneficiary(List<ServicePlan> servicePlanList, String participantID) {
-        Participant beneficiary = participantRepository.findById(participantID)
-                .orElseThrow(() -> new ResourceNotFoundException(participantID));
-        beneficiary.setServicePlanList(servicePlanList);
-        participantRepository.save(beneficiary);
     }
 }
