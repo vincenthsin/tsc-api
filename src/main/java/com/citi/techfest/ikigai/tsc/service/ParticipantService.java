@@ -1,17 +1,21 @@
 package com.citi.techfest.ikigai.tsc.service;
 
+import com.citi.techfest.ikigai.tsc.dto.BeneficiarySearchCondition;
 import com.citi.techfest.ikigai.tsc.entity.Navigator;
 import com.citi.techfest.ikigai.tsc.entity.Participant;
 import com.citi.techfest.ikigai.tsc.entity.ServiceItem;
+import com.citi.techfest.ikigai.tsc.mapper.ParticipantMapper;
 import com.citi.techfest.ikigai.tsc.repository.NavigatorRepository;
 import com.citi.techfest.ikigai.tsc.repository.ParticipantRepository;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.citi.techfest.ikigai.tsc.util.Constants;
+import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ParticipantService {
@@ -20,6 +24,7 @@ public class ParticipantService {
     private ParticipantRepository participantRepository;
     @Autowired
     private NavigatorRepository navigatorRepository;
+
 
     public List<Navigator> getAllNavigators() {
         return navigatorRepository.findAll();
@@ -32,6 +37,7 @@ public class ParticipantService {
     public List<Participant> getAllBeneficiaries() {
         return participantRepository.findByRole(Constants.BENEFICIARY);
     }
+
     public Optional<Participant> getParticipantById(String id) {
         return participantRepository.findById(Long.parseLong(id));
     }
@@ -48,6 +54,7 @@ public class ParticipantService {
 //        else return null;
         return null;
     }
+
     public Participant createParticipant(Participant participant) {
         return participantRepository.save(participant);
     }
@@ -89,5 +96,25 @@ public class ParticipantService {
         participantRepository.save(participant);
         Navigator navigator = navigatorRepository.findById(Long.parseLong(navigatorId)).get();
         navigatorRepository.save(navigator);
+    }
+
+    @Autowired
+    private ParticipantMapper participantMapper;
+
+    public PageInfo<Participant> searchBeneficiary(BeneficiarySearchCondition beneficiarySearchCondition) {
+
+        Boolean caseClosure = beneficiarySearchCondition.getCaseClosure();
+        String developGoal = beneficiarySearchCondition.getDevelopGoal();
+        String gender = beneficiarySearchCondition.getGender();
+        String navigator = beneficiarySearchCondition.getNavigator();
+        String name = beneficiarySearchCondition.getName();
+        int pageIndex = beneficiarySearchCondition.getPage(); //当前页码（注意：第一页是从0开始）
+        int pageSize = beneficiarySearchCondition.getPaginationSize();
+        String sortField = StringUtils.hasText(beneficiarySearchCondition.getOrderFiled()) ? beneficiarySearchCondition.getOrderFiled() : "name";
+        String sortOrder = StringUtils.hasText(beneficiarySearchCondition.getOrderType()) ? beneficiarySearchCondition.getOrderType() : "ASC";
+        PageHelper.startPage(pageIndex, pageSize);
+        List<Participant> searchResult = participantMapper.searchBeneficiary(caseClosure, developGoal, gender, navigator, name, sortField, sortOrder);
+        PageInfo<Participant> pageResult = new PageInfo<>(searchResult);
+        return pageResult;
     }
 }

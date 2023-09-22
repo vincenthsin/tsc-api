@@ -4,3 +4,7 @@ amazon:
   aws:
     accesskey: AKIA5K6HSESLW5JFPX6S
     secretkey: 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
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
