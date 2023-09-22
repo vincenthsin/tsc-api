@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.citi.techfest.ikigai.tsc.mapper.CabinMapper">
+
+
+    <resultMap id="cabinMap" type="com.citi.techfest.ikigai.tsc.entity.Cabin">
+        <result column="availability" property="availability"/>
+        <result column="facility" property="facility"/>
+        <result column="location" property="location"/>
+        <result column="number" property="number"/>
+        <result column="tenant" property="tenant"/>
+    </resultMap>
+    <select id="searchCabin" resultType="com.citi.techfest.ikigai.tsc.entity.Cabin"
+            resultMap="cabinMap">
+        select * from cabin
+        <where>
+            <if test="number!=null">
+                number = #{number}
+            </if>
+            <if test="availability!=null">
+                and availability =#{availability}
+            </if>
+            <if test="facility!=null">
+                and facility = #{facility}
+            </if>
+            <if test="location">
+                and location like concat('%', #{location}, '%')
+            </if>
+        </where>
+    </select>
+</mapper>
+
+
+
