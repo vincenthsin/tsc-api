@@ -4,6 +4,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
 import com.citi.techfest.ikigai.tsc.entity.Navigator;
 import com.citi.techfest.ikigai.tsc.entity.Participant;
+import com.citi.techfest.ikigai.tsc.entity.ServiceItem;
 import com.citi.techfest.ikigai.tsc.entity.ServicePlan;
 import com.citi.techfest.ikigai.tsc.repository.NavigatorRepository;
 import com.citi.techfest.ikigai.tsc.repository.ParticipantRepository;
@@ -80,9 +81,9 @@ public class ParticipantService {
         return participantRepository.findAll();
     }
 
-    public List<ServicePlan> getAssignedParticipantsServices(String navigatorId) {
+    public List<ServiceItem> getAssignedParticipantsServices(String navigatorId) {
         List<Participant> assignedParticipants = getAssignedParticipants(navigatorId);
-        List<ServicePlan> services = new ArrayList<>();
+        List<ServiceItem> services = new ArrayList<>();
         for (Participant participant : assignedParticipants) {
             services.addAll(participant.getServicePlanList());
         }
