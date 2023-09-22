@@ -71,4 +71,13 @@ public class Participant implements Serializable {
 
     @Column(name = "onboard_date")
     private LocalDate onboardDate;
+
+    @Column(name = "substance_use_history")
+    private String substanceUseHistory;
+
+    @Column(name = "substance_category")
+    private String substanceCategory;
+
+    @Column(name = "substance_active_use")
+    private Boolean substanceActiveUse;
 }
