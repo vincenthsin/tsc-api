@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/api/beneficiary")
+@RequestMapping("/beneficiary")
 public class BeneficiaryController {
 
     @Autowired
