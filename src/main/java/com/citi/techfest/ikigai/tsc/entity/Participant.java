@@ -1,7 +1,9 @@
 package com.citi.techfest.ikigai.tsc.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -10,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "participant")
 @Data
-public class Participant {
+public class Participant implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -61,5 +63,6 @@ public class Participant {
     private String conditionSummary;
 
     @OneToMany(mappedBy = "participant")
+    @JsonBackReference
     private List<ServiceItem> serviceItemList;
 }
