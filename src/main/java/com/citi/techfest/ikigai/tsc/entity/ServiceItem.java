@@ -18,6 +18,10 @@ public class ServiceItem {
         @Column(name = "service_name")
         private String serviceName;
 
+        @ManyToOne
+        @JoinColumn(name = "participant", referencedColumnName = "name")
+        private Participant participant;
+
         @Column(name = "service_provider")
         private String serviceProvider;
 
@@ -50,4 +54,4 @@ public class ServiceItem {
 
         @Column(name = "assigned_case_worker")
         private String caseWorker;
-    }
+}
