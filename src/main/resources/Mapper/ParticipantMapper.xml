@@ -17,6 +17,9 @@
         <result column="case_closure_leave_reason" property="caseClosureLeaveReason"/>
         <result column="case_closure_comments" property="caseClosureComments"/>
         <result column="onboard_date" property="onboardDate"/>
+        <result column="substance_use_history" property="substanceUseHistory"/>
+        <result column="substance_category" property="substanceCategory"/>
+        <result column="substance_active_use" property="substanceActiveUse"/>
         <collection property="serviceItemList" javaType="List" ofType="com.citi.techfest.ikigai.tsc.entity.ServiceItem"
                     autoMapping="true">
             <result column="service_name" property="serviceName"/>
@@ -34,11 +37,11 @@
             resultMap="participantMap">
         select p.role,p.name,p.gender,p.contact_number,p.email,p.date_of_birth,p.cabin_number,p.move_in_date,
         p.case_closure,p.case_closure_leave_date,p.case_closure_leave_reason,p.case_closure_comments,p.assigned_navigator,p.develop_goal,p.condition_summary,
-        p.organization,p.onboard_date,
+        p.organization,p.onboard_date,p.substance_use_history,p.substance_category,p.substance_active_use,
         s.service_name,s.participant,s.service_provider,s.organization_address,s.service_category,s.service_start_date,s.last_modified_date,
         s.service_status,s.service_comments,s.service_feedback,s.case_worker
-        from tsc.participant p left join
-        tsc.service_item s
+        from ikigaidb.participant p left join
+        ikigaidb.service_item s
         on p.name=s.participant
         <where>
             <if test="caseClosure!=null">
@@ -64,7 +67,7 @@
     </select>
 
     <select id="searchStaff" resultType="com.citi.techfest.ikigai.tsc.entity.Participant">
-        select * from tsc.participant
+        select * from ikigaidb.participant
         <where>
             <if test="name!=null">
                 name like concat('%', #{name}, '%')
