@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 @RestController
-@RequestMapping("/api/service")
+@RequestMapping("/service")
 public class ServicesController {
     private final ServiceItemRepository serviceItemRepository;
     private final ParticipantRepository participantRepository;
